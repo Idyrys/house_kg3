@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface SeriesService {
     List<Series> getAllSeries();
+    Series getReferenceById(Long id);
 }

@@ -18,4 +18,9 @@ public class TypeOfStructureServiceImpl implements TypeOfStructureService {
     public List<TypeOfStructure> getAllTypeOfStructure() {
         return typeOfStructureRepo.findAll();
     }
+
+    @Override
+    public TypeOfStructure getReferenceById(Long id) {
+        return typeOfStructureRepo.getReferenceById(id);
+    }
 }

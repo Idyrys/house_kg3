@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface NumberOfRoomService {
     List<NumberOfRoom> getAllNumberOfRoom();
+    NumberOfRoom getReferenceById(Long id);
 }

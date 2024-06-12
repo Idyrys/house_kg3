@@ -18,4 +18,19 @@ public class CurrencyServiceImpl implements CurrencyService {
     public List<Currency> getAllCurrency() {
         return currencyRepo.findAll();
     }
+
+    @Override
+    public Currency getReferenceById(Long id) {
+        return currencyRepo.getReferenceById(id);
+    }
+
+    @Override
+    public String typeDollars() {
+        return currencyRepo.typeDollars();
+    }
+
+    @Override
+    public String typeSoms() {
+        return currencyRepo.typeSoms();
+    }
 }

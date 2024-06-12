@@ -18,4 +18,19 @@ public class PriceTypeServiceImpl implements PriceTypeService {
     public List<PriceType> getAllPriceType() {
         return priceTypeRepo.findAll();
     }
+
+    @Override
+    public PriceType getReferenceById(Long id) {
+        return priceTypeRepo.getReferenceById(id);
+    }
+
+    @Override
+    public String typeForAll() {
+        return priceTypeRepo.typeForAll();
+    }
+
+    @Override
+    public String typePerSquareMeter() {
+        return priceTypeRepo.typePerSquareMeter();
+    }
 }

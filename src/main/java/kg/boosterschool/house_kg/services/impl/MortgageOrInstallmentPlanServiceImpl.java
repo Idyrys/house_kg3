@@ -18,4 +18,9 @@ public class MortgageOrInstallmentPlanServiceImpl implements MortgageOrInstallme
     public List<MortgageOrInstallmentPlan> getAllMortgageOrInstallmentPlan() {
         return mortgageOrInstallmentPlanRepo.findAll();
     }
+
+    @Override
+    public MortgageOrInstallmentPlan getReferenceById(Long id) {
+        return mortgageOrInstallmentPlanRepo.getReferenceById(id);
+    }
 }

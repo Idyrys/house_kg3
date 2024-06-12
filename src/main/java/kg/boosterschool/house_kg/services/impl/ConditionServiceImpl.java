@@ -18,4 +18,9 @@ public class ConditionServiceImpl implements ConditionService {
     public List<Condition> getAllCondition() {
         return conditionRepo.findAll();
     }
+
+    @Override
+    public Condition getReferenceById(Long id) {
+        return conditionRepo.getReferenceById(id);
+    }
 }

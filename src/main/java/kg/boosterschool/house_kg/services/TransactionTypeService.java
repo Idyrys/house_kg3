@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface TransactionTypeService {
     List<TransactionType> getAllTransactionType();
+    TransactionType getReferenceById(Long id);
+
 }

@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ConditionService {
     List<Condition> getAllCondition();
+    Condition getReferenceById(Long id);
 }

@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface PropertyTypeService {
     List<PropertyType> getAllPropertyType();
+    PropertyType getReferenceById(Long id);
 }

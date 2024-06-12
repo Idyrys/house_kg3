@@ -8,7 +8,7 @@ import jakarta.persistence.criteria.Predicate;
 import kg.boosterschool.house_kg.dto.responseDto.OurPropertyResponseDto;
 import kg.boosterschool.house_kg.models.*;
 import kg.boosterschool.house_kg.repositories.*;
-import kg.boosterschool.house_kg.services.OurPropertyService;
+import kg.boosterschool.house_kg.services.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
@@ -22,75 +22,76 @@ import java.util.List;
 @Service
 public class OurPropertyServiceImpl implements OurPropertyService {
     private final OurPropertyRepo ourPropertyRepo;
-    private final TransactionTypeRepo transactionTypeRepo;
-    private final PropertyTypeRepo propertyTypeRepo;
-    private final NumberOfRoomRepo numberOfRoomRepo;
-    private final SeriesRepo seriesRepo;
-    private final TypeOfStructureRepo typeOfStructureRepo;
-    private final HeatingRepo heatingRepo;
-    private final ConditionRepo conditionRepo;
-    private final LocationRepo locationRepo;
-    private final CurrencyRepo currencyRepo;
-    private final PriceTypeRepo priceTypeRepo;
-    private final MortgageOrInstallmentPlanRepo mortgageOrInstallmentPlanRepo;
-    private final PossibilityOfExchangeRepo possibilityOfExchangeRepo;
-    private final ExchangeRateRepo exchangeRateRepo;
+
+    private final TransactionTypeService transactionTypeService;
+    private final PropertyTypeService propertyTypeService;
+    private final NumberOfRoomService numberOfRoomService;
+    private final SeriesService seriesService;
+    private final TypeOfStructureService typeOfStructureService;
+    private final HeatingService heatingService;
+    private final ConditionService conditionService;
+    private final LocationService locationService;
+    private final CurrencyService currencyService;
+    private final PriceTypeService priceTypeService;
+    private final MortgageOrInstallmentPlanService mortgageOrInstallmentPlanService;
+    private final PossibilityOfExchangeService possibilityOfExchangeService;
+    private final ExchangeRateService exchangeRateService;
     double totalCostCom1;
     double totalCostDollar1;
     double costPerSquareMeterInDollars1;
     double costPerSquareMeterInSoms1;
 
 
-    public OurPropertyServiceImpl(OurPropertyRepo ourPropertyRepo, TransactionTypeRepo transactionTypeRepo,
-                                  PropertyTypeRepo propertyTypeRepo, NumberOfRoomRepo numberOfRoomRepo,
-                                  SeriesRepo seriesRepo, TypeOfStructureRepo typeOfStructureRepo,
-                                  HeatingRepo heatingRepo, ConditionRepo conditionRepo,
-                                  LocationRepo locationRepo, CurrencyRepo currencyRepo,
-                                  PriceTypeRepo priceTypeRepo, MortgageOrInstallmentPlanRepo mortgageOrInstallmentPlanRepo,
-                                  PossibilityOfExchangeRepo possibilityOfExchangeRepo, ExchangeRateRepo exchangeRateRepo) {
+    public OurPropertyServiceImpl(OurPropertyRepo ourPropertyRepo, TransactionTypeService transactionTypeService,
+                                  PropertyTypeService propertyTypeService, NumberOfRoomService numberOfRoomService,
+                                  SeriesService seriesService, TypeOfStructureService typeOfStructureService,
+                                  HeatingService heatingService, ConditionService conditionService,
+                                  LocationService locationService, CurrencyService currencyService,
+                                  PriceTypeService priceTypeService, MortgageOrInstallmentPlanService mortgageOrInstallmentPlanService,
+                                  PossibilityOfExchangeService possibilityOfExchangeService, ExchangeRateService exchangeRateService) {
         this.ourPropertyRepo = ourPropertyRepo;
-        this.transactionTypeRepo = transactionTypeRepo;
-        this.propertyTypeRepo = propertyTypeRepo;
-        this.numberOfRoomRepo = numberOfRoomRepo;
-        this.seriesRepo = seriesRepo;
-        this.typeOfStructureRepo = typeOfStructureRepo;
-        this.heatingRepo = heatingRepo;
-        this.conditionRepo = conditionRepo;
-        this.locationRepo = locationRepo;
-        this.currencyRepo = currencyRepo;
-        this.priceTypeRepo = priceTypeRepo;
-        this.mortgageOrInstallmentPlanRepo = mortgageOrInstallmentPlanRepo;
-        this.possibilityOfExchangeRepo = possibilityOfExchangeRepo;
-        this.exchangeRateRepo = exchangeRateRepo;
+        this.transactionTypeService = transactionTypeService;
+        this.propertyTypeService = propertyTypeService;
+        this.numberOfRoomService = numberOfRoomService;
+        this.seriesService = seriesService;
+        this.typeOfStructureService = typeOfStructureService;
+        this.heatingService = heatingService;
+        this.conditionService = conditionService;
+        this.locationService = locationService;
+        this.currencyService = currencyService;
+        this.priceTypeService = priceTypeService;
+        this.mortgageOrInstallmentPlanService = mortgageOrInstallmentPlanService;
+        this.possibilityOfExchangeService = possibilityOfExchangeService;
+        this.exchangeRateService = exchangeRateService;
     }
     @Override
     public String createOurProperty(OurPropertyDto ourPropertyDto) {
-        TransactionType transactionType = transactionTypeRepo.getReferenceById(ourPropertyDto.id_transaction_type());
-        PropertyType propertyType = propertyTypeRepo.getReferenceById(ourPropertyDto.id_property_type());
-        NumberOfRoom numberOfRoom = numberOfRoomRepo.getReferenceById(ourPropertyDto.id_number_of_room());
-        Series series = seriesRepo.getReferenceById(ourPropertyDto.id_series());
-        TypeOfStructure typeOfStructure = typeOfStructureRepo.getReferenceById(ourPropertyDto.id_type_of_structure());
-        Heating heating = heatingRepo.getReferenceById(ourPropertyDto.id_heating());
-        Condition condition = conditionRepo.getReferenceById(ourPropertyDto.id_condition());
-        Location location = locationRepo.getReferenceById(ourPropertyDto.id_location());
-        Currency currency = currencyRepo.getReferenceById(ourPropertyDto.id_currencies());
-        PriceType priceType = priceTypeRepo.getReferenceById(ourPropertyDto.id_price_types());
-        MortgageOrInstallmentPlan installmentPlan = mortgageOrInstallmentPlanRepo.getReferenceById(ourPropertyDto.id_installment_plan());
-        MortgageOrInstallmentPlan mortgage = mortgageOrInstallmentPlanRepo.getReferenceById(ourPropertyDto.id_mortgage());
-        PossibilityOfExchange possibilityOfExchange = possibilityOfExchangeRepo.getReferenceById(ourPropertyDto.id_possibility_of_exchange());
+        TransactionType transactionType = transactionTypeService.getReferenceById(ourPropertyDto.id_transaction_type());
+        PropertyType propertyType = propertyTypeService.getReferenceById(ourPropertyDto.id_property_type());
+        NumberOfRoom numberOfRoom = numberOfRoomService.getReferenceById(ourPropertyDto.id_number_of_room());
+        Series series = seriesService.getReferenceById(ourPropertyDto.id_series());
+        TypeOfStructure typeOfStructure = typeOfStructureService.getReferenceById(ourPropertyDto.id_type_of_structure());
+        Heating heating = heatingService.getReferenceById(ourPropertyDto.id_heating());
+        Condition condition = conditionService.getReferenceById(ourPropertyDto.id_condition());
+        Location location = locationService.getReferenceById(ourPropertyDto.id_location());
+        Currency currency = currencyService.getReferenceById(ourPropertyDto.id_currencies());
+        PriceType priceType = priceTypeService.getReferenceById(ourPropertyDto.id_price_types());
+        MortgageOrInstallmentPlan installmentPlan = mortgageOrInstallmentPlanService.getReferenceById(ourPropertyDto.id_installment_plan());
+        MortgageOrInstallmentPlan mortgage = mortgageOrInstallmentPlanService.getReferenceById(ourPropertyDto.id_mortgage());
+        PossibilityOfExchange possibilityOfExchange = possibilityOfExchangeService.getReferenceById(ourPropertyDto.id_possibility_of_exchange());
 
-        if (currency.getName().equalsIgnoreCase(currencyRepo.typeDollars()) && priceType.getName().equalsIgnoreCase(priceTypeRepo.typePerSquareMeter())) {
-            totalCostCom1 = (ourPropertyDto.square() * (ourPropertyDto.price()*exchangeRateRepo.findActiveExchangeRates()));
+        if (currency.getName().equalsIgnoreCase(currencyService.typeDollars()) && priceType.getName().equalsIgnoreCase(priceTypeService.typePerSquareMeter())) {
+            totalCostCom1 = (ourPropertyDto.square() * (ourPropertyDto.price()*exchangeRateService.findActiveExchangeRates()));
             totalCostDollar1 = ourPropertyDto.square() * ourPropertyDto.price();
-        } else if (currency.getName().equalsIgnoreCase(currencyRepo.typeSoms() )&& priceType.getName().equalsIgnoreCase(priceTypeRepo.typePerSquareMeter())) {
+        } else if (currency.getName().equalsIgnoreCase(currencyService.typeSoms() )&& priceType.getName().equalsIgnoreCase(priceTypeService.typePerSquareMeter())) {
             totalCostCom1 = ourPropertyDto.square() * ourPropertyDto.price();
-            totalCostDollar1 = (ourPropertyDto.square() * (ourPropertyDto.price()/exchangeRateRepo.findActiveExchangeRates()));
-        } else if (currency.getName().equalsIgnoreCase(currencyRepo.typeDollars()) && priceType.getName().equalsIgnoreCase(priceTypeRepo.typeForAll())) {
-            totalCostCom1 = ourPropertyDto.price() * exchangeRateRepo.findActiveExchangeRates();
+            totalCostDollar1 = (ourPropertyDto.square() * (ourPropertyDto.price()/exchangeRateService.findActiveExchangeRates()));
+        } else if (currency.getName().equalsIgnoreCase(currencyService.typeDollars()) && priceType.getName().equalsIgnoreCase(priceTypeService.typeForAll())) {
+            totalCostCom1 = ourPropertyDto.price() * exchangeRateService.findActiveExchangeRates();
             totalCostDollar1 = ourPropertyDto.price();
-        } else if (currency.getName().equalsIgnoreCase(currencyRepo.typeSoms()) && priceType.getName().equalsIgnoreCase(priceTypeRepo.typeForAll())) {
+        } else if (currency.getName().equalsIgnoreCase(currencyService.typeSoms()) && priceType.getName().equalsIgnoreCase(priceTypeService.typeForAll())) {
             totalCostCom1 = ourPropertyDto.price();
-            totalCostDollar1 = ourPropertyDto.price() / exchangeRateRepo.findActiveExchangeRates();
+            totalCostDollar1 = ourPropertyDto.price() / exchangeRateService.findActiveExchangeRates();
         }
         costPerSquareMeterInDollars1 = totalCostDollar1 / ourPropertyDto.square();
         costPerSquareMeterInSoms1 = totalCostCom1 / ourPropertyDto.square();
@@ -235,33 +236,33 @@ public class OurPropertyServiceImpl implements OurPropertyService {
 
 
 
-        if (priceMin != null && priceMax != null && priceType.equalsIgnoreCase(priceTypeRepo.typeForAll()) && currency.equalsIgnoreCase(currencyRepo.typeDollars())) {
+        if (priceMin != null && priceMax != null && priceType.equalsIgnoreCase(priceTypeService.typeForAll()) && currency.equalsIgnoreCase(currencyService.typeDollars())) {
             predicates.add(criteriaBuilder.between(root.get("totalCostDollar"), priceMin, priceMax));
-        } else if (priceMin != null && priceType.equalsIgnoreCase(priceTypeRepo.typeForAll()) && currency.equalsIgnoreCase(currencyRepo.typeDollars())) {
+        } else if (priceMin != null && priceType.equalsIgnoreCase(priceTypeService.typeForAll()) && currency.equalsIgnoreCase(currencyService.typeDollars())) {
             predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("totalCostDollar"), priceMin));
-        } else if (priceMax != null && priceType.equalsIgnoreCase(priceTypeRepo.typeForAll()) && currency.equalsIgnoreCase(currencyRepo.typeDollars())) {
+        } else if (priceMax != null && priceType.equalsIgnoreCase(priceTypeService.typeForAll()) && currency.equalsIgnoreCase(currencyService.typeDollars())) {
             predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("totalCostDollar"), priceMax));
-        }else if (priceMin != null && priceMax != null && priceType.equalsIgnoreCase(priceTypeRepo.typeForAll()) && currency.equalsIgnoreCase(currencyRepo.typeSoms())) {
+        }else if (priceMin != null && priceMax != null && priceType.equalsIgnoreCase(priceTypeService.typeForAll()) && currency.equalsIgnoreCase(currencyService.typeSoms())) {
             predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("totalCostCom"), priceMax));
-        }else if (priceMin != null && priceType.equalsIgnoreCase(priceTypeRepo.typeForAll()) && currency.equalsIgnoreCase(currencyRepo.typeSoms())) {
+        }else if (priceMin != null && priceType.equalsIgnoreCase(priceTypeService.typeForAll()) && currency.equalsIgnoreCase(currencyService.typeSoms())) {
             predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("totalCostCom"), priceMin));
-        } else if (priceMax != null && priceType.equalsIgnoreCase(priceTypeRepo.typeForAll()) && currency.equalsIgnoreCase(currencyRepo.typeSoms())) {
+        } else if (priceMax != null && priceType.equalsIgnoreCase(priceTypeService.typeForAll()) && currency.equalsIgnoreCase(currencyService.typeSoms())) {
             predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("totalCostCom"), priceMax));
         }
 
 
 
-        if (priceMin != null && priceMax != null && priceType.equalsIgnoreCase(priceTypeRepo.typePerSquareMeter()) && currency.equalsIgnoreCase(currencyRepo.typeDollars())) {
+        if (priceMin != null && priceMax != null && priceType.equalsIgnoreCase(priceTypeService.typePerSquareMeter()) && currency.equalsIgnoreCase(currencyService.typeDollars())) {
             predicates.add(criteriaBuilder.between(root.get("costPerSquareMeterInDollars"), priceMin, priceMax));
-        } else if (priceMin != null && priceType.equalsIgnoreCase(priceTypeRepo.typePerSquareMeter()) && currency.equalsIgnoreCase(currencyRepo.typeDollars())) {
+        } else if (priceMin != null && priceType.equalsIgnoreCase(priceTypeService.typePerSquareMeter()) && currency.equalsIgnoreCase(currencyService.typeDollars())) {
             predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("costPerSquareMeterInDollars"), priceMin));
-        } else if (priceMax != null && priceType.equalsIgnoreCase(priceTypeRepo.typePerSquareMeter()) && currency.equalsIgnoreCase(currencyRepo.typeDollars())) {
+        } else if (priceMax != null && priceType.equalsIgnoreCase(priceTypeService.typePerSquareMeter()) && currency.equalsIgnoreCase(currencyService.typeDollars())) {
             predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("costPerSquareMeterInDollars"), priceMax));
-        }else if (priceMin != null && priceMax != null && priceType.equalsIgnoreCase(priceTypeRepo.typePerSquareMeter()) && currency.equalsIgnoreCase(currencyRepo.typeSoms())) {
+        }else if (priceMin != null && priceMax != null && priceType.equalsIgnoreCase(priceTypeService.typePerSquareMeter()) && currency.equalsIgnoreCase(currencyService.typeSoms())) {
             predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("costPerSquareMeterInSoms"), priceMax));
-        }else if (priceMin != null && priceType.equalsIgnoreCase(priceTypeRepo.typePerSquareMeter()) && currency.equalsIgnoreCase(currencyRepo.typeSoms())) {
+        }else if (priceMin != null && priceType.equalsIgnoreCase(priceTypeService.typePerSquareMeter()) && currency.equalsIgnoreCase(currencyService.typeSoms())) {
             predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("costPerSquareMeterInSoms"), priceMin));
-        } else if (priceMax != null && priceType.equalsIgnoreCase(priceTypeRepo.typePerSquareMeter()) && currency.equalsIgnoreCase(currencyRepo.typeSoms())) {
+        } else if (priceMax != null && priceType.equalsIgnoreCase(priceTypeService.typePerSquareMeter()) && currency.equalsIgnoreCase(currencyService.typeSoms())) {
             predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("costPerSquareMeterInSoms"), priceMax));
         }
 

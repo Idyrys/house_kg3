@@ -6,4 +6,7 @@ import java.util.List;
 
 public interface PriceTypeService {
     List<PriceType> getAllPriceType();
+    PriceType getReferenceById(Long id);
+    String typeForAll();
+    String typePerSquareMeter();
 }

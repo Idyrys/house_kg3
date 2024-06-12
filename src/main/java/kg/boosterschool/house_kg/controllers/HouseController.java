@@ -4,6 +4,7 @@ import kg.boosterschool.house_kg.dto.LocationDto;
 import kg.boosterschool.house_kg.dto.OurPropertyDto;
 import kg.boosterschool.house_kg.dto.responseDto.OurPropertyResponseDto;
 import kg.boosterschool.house_kg.models.*;
+import kg.boosterschool.house_kg.services.*;
 import kg.boosterschool.house_kg.services.impl.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,19 +14,19 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/real-estate/")
 public class HouseController {
-    private final TransactionTypeServiceImpl transactionTypeService;
-    private final PropertyTypeServiceImpl propertyTypeService;
-    private final NumberOfRoomServiceImpl numberOfRoomService;
-    private final SeriesServiceImpl seriesService;
-    private final TypeOfStructureServiceImpl typeOfStructureService;
-    private final HeatingServiceImpl heatingService;
-    private final ConditionServiceImpl conditionService;
-    private final LocationServiceImpl locationService;
-    private final CurrencyServiceImpl currencyService;
-    private final PriceTypeServiceImpl priceTypeService;
-    private final MortgageOrInstallmentPlanServiceImpl mortgageOrInstallmentPlanService;
-    private final PossibilityOfExchangeServiceImpl possibilityOfExchangeService;
-    private final OurPropertyServiceImpl ourPropertyService;
+    private final TransactionTypeService transactionTypeService;
+    private final PropertyTypeService propertyTypeService;
+    private final NumberOfRoomService numberOfRoomService;
+    private final SeriesService seriesService;
+    private final TypeOfStructureService typeOfStructureService;
+    private final HeatingService heatingService;
+    private final ConditionService conditionService;
+    private final LocationService locationService;
+    private final CurrencyService currencyService;
+    private final PriceTypeService priceTypeService;
+    private final MortgageOrInstallmentPlanService mortgageOrInstallmentPlanService;
+    private final PossibilityOfExchangeService possibilityOfExchangeService;
+    private final OurPropertyService ourPropertyService;
 
     public HouseController(TransactionTypeServiceImpl transactionTypeService, PropertyTypeServiceImpl propertyTypeService, NumberOfRoomServiceImpl numberOfRoomService, SeriesServiceImpl seriesService, TypeOfStructureServiceImpl typeOfStructureService, HeatingServiceImpl heatingService, ConditionServiceImpl conditionService, LocationServiceImpl locationService, CurrencyServiceImpl currencyService, PriceTypeServiceImpl priceTypeService, MortgageOrInstallmentPlanServiceImpl mortgageOrInstallmentPlanService, PossibilityOfExchangeServiceImpl possibilityOfExchangeService, OurPropertyServiceImpl ourPropertyService) {
         this.transactionTypeService = transactionTypeService;
@@ -120,7 +121,7 @@ public class HouseController {
     @GetMapping("get-all-our-properties")
     ResponseEntity<List<OurPropertyResponseDto>> getAllOutProperties(
             @RequestParam(required = false, defaultValue = "1") int page,
-            @RequestParam(required = false, defaultValue = "10") int pageSize,
+            @RequestParam(required = false, defaultValue = "5") int pageSize,
             @RequestParam (required = false)Integer floor,
             @RequestParam (required = false)Integer yearBuilt,
             @RequestParam String dealType ,

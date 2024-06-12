@@ -18,4 +18,9 @@ public class NumberOfRoomServiceImpl implements NumberOfRoomService {
     public List<NumberOfRoom> getAllNumberOfRoom() {
         return numberOfRoomRepo.findAll();
     }
+
+    @Override
+    public NumberOfRoom getReferenceById(Long id) {
+        return numberOfRoomRepo.getReferenceById(id);
+    }
 }

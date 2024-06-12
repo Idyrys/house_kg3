@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface MortgageOrInstallmentPlanService {
     List<MortgageOrInstallmentPlan> getAllMortgageOrInstallmentPlan();
+    MortgageOrInstallmentPlan getReferenceById(Long id);
 }

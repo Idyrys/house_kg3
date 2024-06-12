@@ -1,6 +1,7 @@
 package kg.boosterschool.house_kg.services.impl;
 
 import kg.boosterschool.house_kg.dto.LocationDto;
+import kg.boosterschool.house_kg.models.Location;
 import kg.boosterschool.house_kg.repositories.LocationRepo;
 import kg.boosterschool.house_kg.services.LocationService;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,11 @@ public class LocationServiceImpl implements LocationService {
                 .stream()
                 .map(location -> new LocationDto(location.getId(), location.getName()))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Location getReferenceById(Long id) {
+        return locationRepo.getReferenceById(id);
     }
 
 }

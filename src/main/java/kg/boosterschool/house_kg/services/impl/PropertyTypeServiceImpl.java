@@ -18,4 +18,9 @@ public class PropertyTypeServiceImpl implements PropertyTypeService {
     public List<PropertyType> getAllPropertyType() {
         return propertyTypeRepo.findAll();
     }
+
+    @Override
+    public PropertyType getReferenceById(Long id) {
+        return propertyTypeRepo.getReferenceById(id);
+    }
 }

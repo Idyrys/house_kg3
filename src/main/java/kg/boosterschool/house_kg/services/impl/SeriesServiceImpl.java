@@ -18,4 +18,9 @@ public class SeriesServiceImpl implements SeriesService {
     public List<Series> getAllSeries() {
         return seriesRepo.findAll();
     }
+
+    @Override
+    public Series getReferenceById(Long id) {
+        return seriesRepo.getReferenceById(id);
+    }
 }

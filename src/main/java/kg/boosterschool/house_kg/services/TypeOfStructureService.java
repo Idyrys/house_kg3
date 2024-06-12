@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface TypeOfStructureService {
     List<TypeOfStructure> getAllTypeOfStructure();
+    TypeOfStructure getReferenceById(Long id);
 }

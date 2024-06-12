@@ -18,4 +18,9 @@ public class TransactionTypeServiceImpl implements TransactionTypeService {
     public List<TransactionType> getAllTransactionType() {
         return transactionTypeRepo.findAll();
     }
+
+    @Override
+    public TransactionType getReferenceById(Long id) {
+        return transactionTypeRepo.getReferenceById(id);
+    }
 }

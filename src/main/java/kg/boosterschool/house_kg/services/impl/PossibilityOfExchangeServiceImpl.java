@@ -18,4 +18,9 @@ public class PossibilityOfExchangeServiceImpl implements PossibilityOfExchangeSe
     public List<PossibilityOfExchange> getAllPossibilityOfExchange() {
         return possibilityOfExchangeRepo.findAll();
     }
+
+    @Override
+    public PossibilityOfExchange getReferenceById(Long id) {
+        return possibilityOfExchangeRepo.getReferenceById(id);
+    }
 }

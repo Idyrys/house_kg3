@@ -18,4 +18,9 @@ public class HeatingServiceImpl implements HeatingService {
     public List<Heating> getAllHeating() {
         return heatingRepo.findAll();
     }
+
+    @Override
+    public Heating getReferenceById(Long id) {
+        return heatingRepo.getReferenceById(id);
+    }
 }
