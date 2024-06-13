@@ -1,7 +1,7 @@
 package kg.boosterschool.house_kg.controllers;
 
-import kg.boosterschool.house_kg.dto.LocationDto;
-import kg.boosterschool.house_kg.dto.OurPropertyDto;
+import kg.boosterschool.house_kg.dto.responseDto.LocationDto;
+import kg.boosterschool.house_kg.dto.requestDto.OurPropertyDto;
 import kg.boosterschool.house_kg.dto.responseDto.OurPropertyResponseDto;
 import kg.boosterschool.house_kg.models.*;
 import kg.boosterschool.house_kg.services.*;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/real-estate/")
+@RequestMapping("/api/v1/real-estate/")
 public class HouseController {
     private final TransactionTypeService transactionTypeService;
     private final PropertyTypeService propertyTypeService;

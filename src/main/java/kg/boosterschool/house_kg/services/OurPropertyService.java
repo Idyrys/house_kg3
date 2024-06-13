@@ -1,10 +1,8 @@
 package kg.boosterschool.house_kg.services;
 
-import kg.boosterschool.house_kg.dto.OurPropertyDto;
+import kg.boosterschool.house_kg.dto.requestDto.OurPropertyDto;
 import kg.boosterschool.house_kg.dto.responseDto.OurPropertyResponseDto;
 import kg.boosterschool.house_kg.models.OurProperty;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 
 
 import java.util.List;

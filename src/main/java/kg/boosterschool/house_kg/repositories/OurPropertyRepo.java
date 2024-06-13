@@ -37,8 +37,6 @@ public interface OurPropertyRepo extends JpaRepository<OurProperty, Long>, JpaSp
             "join locations ls3 on ls2.id_locations = ls3.id ", nativeQuery = true)
     List<String> getAllOurPropertyResponseDto();
 
-    List<OurProperty> findAll(Specification<OurProperty> specification);
-
 
     @Query(value = "Select l3.name from locations l3 where id =(\n" +
             "Select l2.id_locations from locations l2 where id =(\n" +

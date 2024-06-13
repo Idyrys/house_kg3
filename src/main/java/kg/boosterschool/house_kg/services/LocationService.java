@@ -1,6 +1,6 @@
 package kg.boosterschool.house_kg.services;
 
-import kg.boosterschool.house_kg.dto.LocationDto;
+import kg.boosterschool.house_kg.dto.responseDto.LocationDto;
 import kg.boosterschool.house_kg.models.Location;
 
 import java.util.List;

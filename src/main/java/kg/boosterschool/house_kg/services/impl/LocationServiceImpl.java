@@ -1,6 +1,6 @@
 package kg.boosterschool.house_kg.services.impl;
 
-import kg.boosterschool.house_kg.dto.LocationDto;
+import kg.boosterschool.house_kg.dto.responseDto.LocationDto;
 import kg.boosterschool.house_kg.models.Location;
 import kg.boosterschool.house_kg.repositories.LocationRepo;
 import kg.boosterschool.house_kg.services.LocationService;

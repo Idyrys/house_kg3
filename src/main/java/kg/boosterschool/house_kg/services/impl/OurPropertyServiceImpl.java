@@ -3,7 +3,7 @@ package kg.boosterschool.house_kg.services.impl;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Root;
-import kg.boosterschool.house_kg.dto.OurPropertyDto;
+import kg.boosterschool.house_kg.dto.requestDto.OurPropertyDto;
 import jakarta.persistence.criteria.Predicate;
 import kg.boosterschool.house_kg.dto.responseDto.OurPropertyResponseDto;
 import kg.boosterschool.house_kg.models.*;

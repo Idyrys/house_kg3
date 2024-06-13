@@ -1,4 +1,4 @@
-package kg.boosterschool.house_kg.dto;
+package kg.boosterschool.house_kg.dto.requestDto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
