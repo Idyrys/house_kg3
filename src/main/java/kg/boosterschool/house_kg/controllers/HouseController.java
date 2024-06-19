@@ -121,7 +121,7 @@ public class HouseController {
     @GetMapping("get-all-our-properties")
     ResponseEntity<List<OurPropertyResponseDto>> getAllOutProperties(
             @RequestParam(required = false, defaultValue = "1") int page,
-            @RequestParam(required = false, defaultValue = "5") int pageSize,
+            @RequestParam(required = false, defaultValue = "20") int pageSize,
             @RequestParam (required = false)Integer floor,
             @RequestParam (required = false)Integer yearBuilt,
             @RequestParam String dealType ,

@@ -30,4 +30,14 @@ public class LocationServiceImpl implements LocationService {
         return locationRepo.getReferenceById(id);
     }
 
+    @Override
+    public String getRegion(String name) {
+        return locationRepo.getRegion(name);
+    }
+
+    @Override
+    public String getSettlement(String name) {
+        return locationRepo.getSettlement(name);
+    }
+
 }

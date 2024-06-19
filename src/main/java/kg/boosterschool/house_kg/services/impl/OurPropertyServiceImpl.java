@@ -22,7 +22,6 @@ import java.util.List;
 @Service
 public class OurPropertyServiceImpl implements OurPropertyService {
     private final OurPropertyRepo ourPropertyRepo;
-
     private final TransactionTypeService transactionTypeService;
     private final PropertyTypeService propertyTypeService;
     private final NumberOfRoomService numberOfRoomService;
@@ -96,21 +95,6 @@ public class OurPropertyServiceImpl implements OurPropertyService {
         costPerSquareMeterInDollars1 = totalCostDollar1 / ourPropertyDto.square();
         costPerSquareMeterInSoms1 = totalCostCom1 / ourPropertyDto.square();
 
-        if ((transactionType.getId() ==1 || transactionType.getId() == 2)
-                && (propertyType.getId() == 1 || propertyType.getId() == 2 || propertyType.getId() == 3)
-                && (numberOfRoom.getId() == 1 || numberOfRoom.getId() == 2 || numberOfRoom.getId() == 3
-                ||  numberOfRoom.getId() == 4 || numberOfRoom.getId() == 5 || numberOfRoom.getId() == 6)
-                && (series.getId() == 1 || series.getId() == 2 || series.getId() == 3)
-                && (typeOfStructure.getId() == 1 || typeOfStructure.getId() == 2 || typeOfStructure.getId() == 3)
-                && (heating.getId() == 1 || heating.getId() == 2 || heating.getId() == 3)
-                && (condition.getId() == 1 || condition.getId() == 2 || condition.getId() == 3)
-                && (currency.getId() == 1 || currency.getId() == 2)
-                && (priceType.getId() == 1 || priceType.getId() == 2)
-                && (installmentPlan.getId() == 1 || installmentPlan.getId() == 2)
-                && (mortgage.getId() == 1 || mortgage.getId() == 2)
-                && (possibilityOfExchange.getId() == 1 || possibilityOfExchange.getId() == 2
-                || possibilityOfExchange.getId() == 3 || possibilityOfExchange.getId() == 4)
-        ) {
             OurProperty ourProperty = new OurProperty();
             ourProperty.setTransactionType(transactionType);
             ourProperty.setPropertyType(propertyType);
@@ -138,10 +122,6 @@ public class OurPropertyServiceImpl implements OurPropertyService {
             ourProperty.setActive(true);
             ourPropertyRepo.save(ourProperty);
             return "Успешно";
-        } else {
-            return "Не успешно";
-        }
-
     }
 
     @Override
@@ -159,8 +139,8 @@ public class OurPropertyServiceImpl implements OurPropertyService {
                         ourProperty.getFloor(),
                         ourProperty.getHeating().getName(),
                         ourProperty.getCondition().getName(),
-                        ourPropertyRepo.getRegion(ourProperty.getLocation().getName()),
-                        ourPropertyRepo.getSettlement(ourProperty.getLocation().getName()),
+                        locationService.getRegion(ourProperty.getLocation().getName()),
+                        locationService.getSettlement(ourProperty.getLocation().getName()),
                         ourProperty.getLocation().getName(),
                         ourProperty.getStreetName(),
                         ourProperty.getHouseNumber(),
@@ -206,8 +186,6 @@ public class OurPropertyServiceImpl implements OurPropertyService {
          return pages.getContent();
     }
 
-
-
     private List<Predicate> buildPredicates(
             Integer floor, Integer yearBuilt, String dealType,
             String propertyType ,Integer roomCount,String series,
@@ -223,7 +201,6 @@ public class OurPropertyServiceImpl implements OurPropertyService {
         if (floor != null) {
             predicates.add(criteriaBuilder.equal(root.get("floor"), floor));
         }
-
         if (yearBuilt != null) {
             predicates.add(criteriaBuilder.equal(root.get("yearOfConstruction"), yearBuilt));
         }
@@ -233,8 +210,6 @@ public class OurPropertyServiceImpl implements OurPropertyService {
         if (houseNumber != null) {
             predicates.add(criteriaBuilder.equal(criteriaBuilder.upper(root.get("houseNumber")), houseNumber.toUpperCase()));
         }
-
-
 
         if (priceMin != null && priceMax != null && priceType.equalsIgnoreCase(priceTypeService.typeForAll()) && currency.equalsIgnoreCase(currencyService.typeDollars())) {
             predicates.add(criteriaBuilder.between(root.get("totalCostDollar"), priceMin, priceMax));
@@ -250,8 +225,6 @@ public class OurPropertyServiceImpl implements OurPropertyService {
             predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("totalCostCom"), priceMax));
         }
 
-
-
         if (priceMin != null && priceMax != null && priceType.equalsIgnoreCase(priceTypeService.typePerSquareMeter()) && currency.equalsIgnoreCase(currencyService.typeDollars())) {
             predicates.add(criteriaBuilder.between(root.get("costPerSquareMeterInDollars"), priceMin, priceMax));
         } else if (priceMin != null && priceType.equalsIgnoreCase(priceTypeService.typePerSquareMeter()) && currency.equalsIgnoreCase(currencyService.typeDollars())) {
@@ -265,11 +238,6 @@ public class OurPropertyServiceImpl implements OurPropertyService {
         } else if (priceMax != null && priceType.equalsIgnoreCase(priceTypeService.typePerSquareMeter()) && currency.equalsIgnoreCase(currencyService.typeSoms())) {
             predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("costPerSquareMeterInSoms"), priceMax));
         }
-
-
-
-
-
 
         if (dealType != null) {
             Join<OurProperty, TransactionType> join = root.join("transactionType");
@@ -327,9 +295,6 @@ public class OurPropertyServiceImpl implements OurPropertyService {
             Join<OurProperty,PossibilityOfExchange> join = root.join("possibilityOfExchange");
             predicates.add(criteriaBuilder.equal(criteriaBuilder.upper(join.get("name")), exchangeOption.toUpperCase()));
         }
-
-
         return predicates;
     }
-
 }

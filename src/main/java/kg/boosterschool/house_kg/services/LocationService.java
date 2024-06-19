@@ -8,5 +8,7 @@ import java.util.List;
 public interface LocationService {
     List<LocationDto> getAllLocation(Long id);
     Location getReferenceById(Long id);
+    String getRegion(String name);
+    String getSettlement(String name);
 
 }

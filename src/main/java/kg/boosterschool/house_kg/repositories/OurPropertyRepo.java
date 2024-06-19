@@ -37,17 +37,4 @@ public interface OurPropertyRepo extends JpaRepository<OurProperty, Long>, JpaSp
             "join locations ls3 on ls2.id_locations = ls3.id ", nativeQuery = true)
     List<String> getAllOurPropertyResponseDto();
 
-
-    @Query(value = "Select l3.name from locations l3 where id =(\n" +
-            "Select l2.id_locations from locations l2 where id =(\n" +
-            "select  l1.id_locations from locations l1\n" +
-            "\twhere upper(l1.name) =upper(:name)));",nativeQuery = true)
-    String getRegion(String name);
-
-    @Query(value = "Select l2.name from locations l2 where id =(\n" +
-            "select  l1.id_locations from locations l1\n" +
-            "\twhere upper(l1.name) =upper(:name))",nativeQuery = true)
-    String getSettlement(String name);
-
-
 }
